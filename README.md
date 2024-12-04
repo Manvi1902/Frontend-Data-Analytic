@@ -50,12 +50,12 @@ To get started with this project, follow the steps below to set up your developm
    
 Begin by cloning the repository to your local machine. Open your terminal and run the following command:  
   
-  git clone https://github.com/your-username/vite-min-template.git   
+  git clone [https://github.com/your-username/vite-min-template.git](https://github.com/Manvi1902/Frontend-Data-Analytic.git]   
 
 ### Step 2: Navigate to the Project Directory
 Once the repository has been cloned, navigate to the project directory:
 
-cd vite-min-template  
+cd Frontend-Data-Analytic 
 
 ### Step 3: Install Dependencies
 Before you can run the project, you need to install the necessary dependencies. Use either of the following commands, depending on your package manager preference:
