@@ -1,0 +1,66 @@
+  .mantine-Table-table{
+    padding:10px;
+    table-layout:auto;
+    text-align: center;
+    margin-top: 1rem;
+    width:100%;
+    
+  }
+
+  .mantine-Table-thead{
+   font-size: large ;
+   color:#075967;
+   background-color: #22b8cf;
+  }
+
+
+	.mantine-Table-tbody{
+    font-size: larger;
+    color:#0b7285;
+    font-weight: 500;
+  }
+
+
+  
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 772px) and (max-width: 990px) {
+  .mantine-Container-root{
+    position: absolute;
+    left:"-20px"
+  
+  }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 991px) and (max-width: 1200px) {
+  .tabel-1{
+      max-width:100% ;
+      margin:100px;
+      color:rgb(0, 229, 255);
+  }
+  .tabel-2{
+      max-width:100% ;
+      margin:30px;
+      color:rgb(255, 162, 0);
+  }
+} 
+
+/**extra large device*/
+
+@media only screen and (min-width: 1200px) {
+  .tabel-1{
+      max-width:100% ;
+      margin:100px;
+      color:rgb(0, 229, 255);
+  }
+  .tabel-2{
+      max-width:200% ;
+      margin-top: 0%;
+      color:rgb(255, 162, 0);
+  }
+}
+
+
+
