@@ -15,7 +15,7 @@ const MinMaxCropTable: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await fetch("/data/cropDataset.json"); 
-        const jsonData: Dataset[] = await response.json();
+        const jsonData: Dataset[] = await response.json(); // Parse the JSON data into Dataset type 
         setData(jsonData);
         setMinMaxData(calculateMinMax(jsonData)); // Calculate min-max data when the raw data is fetched
       } catch (error) {
@@ -23,9 +23,11 @@ const MinMaxCropTable: React.FC = () => {
       }
     };
 
-    fetchData();
+    fetchData();// Call the fetchData function to initiate data fetching  
   }, []);
 
+  
+  // Render table rows
   const rows = minMaxData.map((row) => (
     <Table.Tr key={row.Year}>
       <Table.Td>{row.Year}</Table.Td>

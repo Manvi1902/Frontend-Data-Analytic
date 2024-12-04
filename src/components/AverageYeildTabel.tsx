@@ -8,60 +8,66 @@ const AverageYeildTable: React.FC = () => {
   const isSmallScreen = useMediaQuery('(max-width: 768px)');
   const [data, setData] = useState<Dataset[]>([]);
 
-  // Fetch the data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/data/cropDataset.json"); // Replace with the correct path
-        const jsonData: Dataset[] = await response.json();
-        setData(jsonData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  // Calculate average yield and average area
-  const calculateAverages = () => {
-    const averages: {
-      crop: string;
-      avgYield: number;
-      avgArea: number;
-    }[] = [];
-
-    const groupedByCrop = data.reduce((acc: Record<string, Dataset[]>, item) => {
-      const crop = item["Crop Name"];
-      if (!acc[crop]) acc[crop] = [];
-      acc[crop].push(item);
-      return acc;
-    }, {});
-
-    for (const crop in groupedByCrop) {
-      const crops = groupedByCrop[crop];
-      const avgYield =
-        crops.reduce(
-          (sum, curr) => sum + (Number(curr["Yield Of Crops (UOM:Kg/Ha(KilogramperHectare))"]) || 0),
-          0
-        ) / crops.length;
-
-      const avgArea =
-        crops.reduce(
-          (sum, curr) => sum + (Number(curr["Area Under Cultivation (UOM:Ha(Hectares))"]) || 0),
-          0
-        ) / crops.length;
-
-      averages.push({
-        crop,
-        avgYield: Math.round(avgYield),
-        avgArea: Math.round(avgArea),
-      });
-    }
-    return averages;
-  };
-
-  const averages = calculateAverages();
+  useEffect(() => {  
+    const fetchData = async () => {  
+      try {  
+        const response = await fetch("/data/cropDataset.json"); // Replace with the correct path to the JSON data  
+        const jsonData: Dataset[] = await response.json(); // Parse the JSON data into Dataset type  
+        setData(jsonData); // Store the fetched data in the component's state  
+      } catch (error) {  
+        console.error("Error fetching data:", error); // Log any errors that occur during the fetch  
+      }  
+    };  
+  
+    fetchData(); // Call the fetchData function to initiate data fetching  
+  }, []); 
+  
+  // Calculate average yield and average area for each crop  
+  const calculateAverages = () => {  
+    const averages: {  
+      crop: string;  
+      avgYield: number;  
+      avgArea: number;  
+    }[] = [];  
+  
+    // Group data by crop name  
+    const groupedByCrop = data.reduce((acc: Record<string, Dataset[]>, item) => {  
+      const crop = item["Crop Name"]; // Extract the crop name from the current item  
+      if (!acc[crop]) acc[crop] = []; // If the crop isn't already in the accumulator, add it  
+      acc[crop].push(item); // Add the current item to the corresponding crop array  
+      return acc; // Return the updated accumulator  
+    }, {});  
+  
+    // Calculate averages for each crop  
+    for (const crop in groupedByCrop) {  
+      const crops = groupedByCrop[crop]; // Get the list of crops for the current crop name  
+  
+      // Calculate the average yield for the current crop  
+      const avgYield =  
+        crops.reduce(  
+          (sum, curr) => sum + (Number(curr["Yield Of Crops (UOM:Kg/Ha(KilogramperHectare))"]) || 0),  
+          0  
+        ) / crops.length; // Divide the total yield by the number of records  
+  
+      // Calculate the average area under cultivation for the current crop  
+      const avgArea =  
+        crops.reduce(  
+          (sum, curr) => sum + (Number(curr["Area Under Cultivation (UOM:Ha(Hectares))"]) || 0),  
+          0  
+        ) / crops.length; // Divide the total area by the number of records  
+  
+      // Push the calculated averages into the results array  
+      averages.push({  
+        crop,  
+        avgYield: Math.round(avgYield), // Round the average yield to the nearest whole number  
+        avgArea: Math.round(avgArea), // Round the average area to the nearest whole number  
+      });  
+    }  
+    return averages; // Return the array of averages to the caller  
+  };  
+  
+  // Call the calculateAverages function and store the result  
+  const averages = calculateAverages(); // Calculate averages based on the current data
 
   // Render table rows
   const rows = averages.map((row) => (
