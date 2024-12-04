@@ -9,7 +9,7 @@ const MinMaxCropTable: React.FC = () => {
 
   const [data, setData] = useState<Dataset[]>([]); // Holds the raw crop data
   const [minMaxData, setMinMaxData] = useState<{ Year: string; maxCrop: string; minCrop: string }[]>([]); // Holds the calculated min-max data
-  
+  console.log(data);
   useEffect(() => {
     // Fetch crop data 
     const fetchData = async () => {
